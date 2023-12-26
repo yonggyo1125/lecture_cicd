@@ -63,3 +63,27 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 sudo systemctl status docker
 ```
 
+# 젠킨스 서버 설치
+
+> 도커 로그인 : 로그인을 해야 docker hub 사용 가능 합니다.
+
+- [가입하기](https://www.docker.com/)
+
+
+> 도커를 이용한 젠킨스 서버 설치시 JDK 버전에 신경써야 합니다. 설치시에 JDK 버전을 태그로 붙여 주면 버전에 맞게 생성된 도커 이미지를 다운 받을 수 있습니다(버전이 있는 경우).
+
+```
+docker pull jenkins/jenkins:jdk17
+```
+
+> 젠킨스 도커 이미지 다운이 안되는 경우 docker search jenkins를 통해 검색 후 설치
+
+
+```
+docker run --name jenkins -d -p 8080:8080 jenkins/jenkins:jdk17
+```
+
+- --name : 컨테이너 이름
+- -d : 백그라운드 실행
+- -p : 연결 포트  / -p 서비스 포트:컨테이너 포트
+
