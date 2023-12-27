@@ -168,7 +168,7 @@ docker images
 ## 컨테이너 생성 및 백그라운드 실행
 
 ```
-docker run --name oracle-xe -d -p 1521:1521 -e ORACLE_PASSWORD=\<SYSTEM 비밀번호\> gvenzl/oracle-xe
+docker run --name oracle-xe -d -p 1521:1521 -e ORACLE_PASSWORD=\<SYSTEM 비밀번호\> gvenzl/oracle-xe:18
 ```
 
 > 정상적으로 실행되는 경우 <code>docker ps</code> 실행시 다음과 같이 실행 중인 컨테이너가 보이게 됩니다.
@@ -186,3 +186,8 @@ docker exec -it oracle-xe bash
 
 - -i : 입력 가능
 - -t : 터미널 사용 가능
+
+```
+sqlplus system/설정한 비밀번호
+```
+
