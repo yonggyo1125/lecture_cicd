@@ -87,6 +87,9 @@ docker run --name jenkins -d -p 8080:8080 jenkins/jenkins:jdk17
 - -d : 백그라운드 실행
 - -p : 연결 포트  / -p 서비스 포트:컨테이너 포트
 
+## AWS 인바운드 보안 규칙 추가 
+
+> 8080 TCP 포트 모든 IP에 허용
 
 # 젠킨스 설정
 
@@ -191,3 +194,6 @@ docker exec -it oracle-xe bash
 sqlplus system/설정한 비밀번호
 ```
 
+## AWS 인바운드 보안 규칙 설정
+
+>  1521 TCP 포트 모든 IP 허용 설정  
