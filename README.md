@@ -87,3 +87,41 @@ docker run --name jenkins -d -p 8080:8080 jenkins/jenkins:jdk17
 - -d : 백그라운드 실행
 - -p : 연결 포트  / -p 서비스 포트:컨테이너 포트
 
+
+# 젠킨스 설정
+
+## Unlock Jenkins
+
+- 웹 브라우저를 실행해서 IP주소:8080에 접속
+- 초기 패스워드는 터미널 프로그램을 통해 서버에 접속하여 아래 명령어를 실행하면 확인할 수 있습니다.
+
+```
+cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+
+- 초기 패스워드를 Administrator password 항목에 입력 후 \[Continue\] 버튼을 클릭합니다.
+
+## Jenkins 플러그인 설치
+
+- <b>Install suggested plugins</b>: Jenkins 커뮤니티에서 가장 유용하다고 알려진 플러그인들을 설치합니다.
+
+## Admin 계정 생성
+
+> Jenkins Admin 계정을 생성합니다. Admin 계정의 패스워드는 기호(예: /, ., !, *…)와 더불어 소문자와 대문자의 영문/숫자 문자를 사용하는 것을 권장합니다.
+
+- Jenkins Admin 계정의 아이디를 입력합니다.
+- Jenkins Admin 계정의 암호를 입력합니다.
+- Jenkins Admin 계정의 이름을 입력합니다.
+- Jenkins Admin 계정의 Email Address을 입력합니다.
+- \[Save and Finish\] 버튼을 클릭합니다.
+
+## Instance Configuraion 설정
+
+> Jenkins Instance Configuraion을 설정합니다. Jenkins Resource에서 절대값으로 사용할 URL 값을 설정하는 단계입니다.
+
+- Jenkins root URL을 입력합니다. (Default URL로 설정하는 것을 권고하고 있습니다.)
+- \[Save and Finish\] 를 클릭합니다.
+
+## 완료
+
+- Start using Jenkins 버튼을 클릭하여 Jenkins 초기화를 완료합니다.
