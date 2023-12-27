@@ -137,3 +137,9 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 ![image6](https://raw.githubusercontent.com/yonggyo1125/lecture_cicd/main/images/image6.png)
 
 - Start using Jenkins 버튼을 클릭하여 Jenkins 초기화를 완료합니다.
+
+
+## 추가 플러그인 설치 - sshagent
+
+> Jenkins 관리 -\> Plusins -\> Aailable plugins -\> ssh 검색 -> shaagent 체크 -> install 버튼 클릭
+
