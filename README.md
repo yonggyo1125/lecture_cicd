@@ -7,7 +7,7 @@
 
 # AWS 스왑 공간 늘리기 (모든 서버 공통)
 > 젠킨스 서버나 스프링부트 서버를 구축하는 경우 AWS EC2 프리티어 사양에서 제공하는 램1G, 스왑공간 16MB 설정은 서버의 다운 현상을 발생시켜 정상적인 서비스가 어렵게 만듭니다. 
-> 스왑메모리를 다음 명령어를 통해 충분히 늘려줍니다.
+> 스왑메모리를 다음 명령어를 통해 충분히 늘려줍니다(스왑공간 128MB, 최소 32MB 유지).
 
 ```
 sudo dd if=/dev/zero of=/swapfile bs=128M count=32
@@ -143,3 +143,46 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 
 > Jenkins 관리 -\> Plusins -\> Aailable plugins -\> ssh 검색 -> shaagent 체크 -> install 버튼 클릭
 
+
+# 데이터베이스 설치 - Oracle XE 18c
+
+## 도커 오라클 XE 이미지 다운로드
+
+```
+docker pull gvenzl/oracle-xe:18
+```
+
+![image7](https://raw.githubusercontent.com/yonggyo1125/lecture_cicd/main/images/image7.png)
+
+> 혹시라도 설치가 안되는 경우 <code>docker search oracle-xe</code> 로 검색 후 가장 별점(STARS)가 많은 이미지를 다운 받습니다.
+
+```
+docker images
+```
+
+> 정상적으로 다운받은 경우 다음과 같이 이미지가 생성이 됩니다.
+
+![image8](https://raw.githubusercontent.com/yonggyo1125/lecture_cicd/main/images/image8.png)
+
+
+## 컨테이너 생성 및 백그라운드 실행
+
+```
+docker run --name oracle-xe -d -p 1521:1521 -e ORACLE_PASSWORD=\<SYSTEM 비밀번호\> gvenzl/oracle-xe
+```
+
+> 정상적으로 실행되는 경우 <code>docker ps</code> 실행시 다음과 같이 실행 중인 컨테이너가 보이게 됩니다.
+
+![image9](https://raw.githubusercontent.com/yonggyo1125/lecture_cicd/main/images/image9.png)
+
+
+## sqlplus 접속
+
+> 다음 명령어를 통해서 컨테이너의 bash 쉘에 접근 합니다.
+
+```
+docker exec -it oracle-xe bash
+```
+
+- -i : 입력 가능
+- -t : 터미널 사용 가능
