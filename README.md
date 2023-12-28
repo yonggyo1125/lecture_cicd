@@ -236,3 +236,54 @@ login project
 
 > project 사용자를 생성하면  /home/project 디렉토리 역시 생성되며 사용자 공간입니다. 이 공간에 스프링 부트가 배포될 것입니다.
 
+
+# 젠킨스 파이프라인 예시 
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Clone') {
+            steps {
+                git branch: 'master', url: 'https://github.com/yonggyo1125/deploytest.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                dir(".") {
+					sh "chmod 744 gradlew"
+                    sh "./gradlew clean build"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sshagent(credentials: ['aws_key']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ubuntu@43.202.183.76 uptime
+                        scp /var/jenkins_home/workspace/test/build/libs/deploytest-0.0.1-SNAPSHOT.jar ubuntu@43.202.183.76:/home/ubuntu/project
+						
+						ssh -t ubuntu@43.202.183.76 ./deploy.sh
+                    '''
+                }
+            }
+        }
+    }
+}
+```
+
+# 웹서버 deploy.sh
+```
+#!/bin/bash
+pid=$(pgrep -f deploytest)
+if [ -n "${pid}" ]
+then
+        kill -15 ${pid}
+        echo kill process ${pid}
+else
+        echo no process
+fi
+chmod +x ./deploytest-0.0.1-SNAPSHOT.jar 
+nohup java -jar -Dspring.profiles.active=prod ./project/deploytest-0.0.1-SNAPSHOT.jar  >> application.log 2> /dev/null &
+```
