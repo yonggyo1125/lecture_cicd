@@ -210,31 +210,11 @@ sudo apt-get install openjdk-17-jdk
 ```
 
 
-## 프로젝트로 사용할 사용자 추가
-
-> 최고 관리자 계정으로 변경
+## 프로젝트 폴더 생성
 
 ```
-sudo -s
+mkdir project
 ```
-
-> 추가시에 비밀번호 설정
-
-```
-adduser project
-```
-
-![image10](https://raw.githubusercontent.com/yonggyo1125/lecture_cicd/main/images/image10.png)
-
-> 로그인 되는지 확인
-
-```
-login project
-
-비밀번호 입력
-```
-
-> project 사용자를 생성하면  /home/project 디렉토리 역시 생성되며 사용자 공간입니다. 이 공간에 스프링 부트가 배포될 것입니다.
 
 
 # 젠킨스 파이프라인 예시 
