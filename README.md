@@ -233,7 +233,7 @@ pipeline {
             steps {
                 dir(".") {
 					sh "chmod 744 gradlew"
-                    sh "./gradlew clean build"
+                    sh "./gradlew clean bootJar"
                 }
             }
         }
