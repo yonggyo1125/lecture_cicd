@@ -264,6 +264,6 @@ then
 else
         echo no process
 fi
-chmod +x ./deploytest-0.0.1-SNAPSHOT.jar 
+chmod +x ./project/deploytest-0.0.1-SNAPSHOT.jar 
 nohup java -jar -Dspring.profiles.active=prod ./project/deploytest-0.0.1-SNAPSHOT.jar  >> application.log 2> /dev/null &
 ```
